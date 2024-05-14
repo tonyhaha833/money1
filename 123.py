@@ -119,7 +119,7 @@ st.subheader("設定一根 K 棒的時間長度(分鐘)")
 import streamlit as st
 
 # 让用户选择时间单位的选项
-time_units = ["分钟", "小时", "天"]
+time_units = ["分鐘", "小時", "天"]
 selected_unit = st.selectbox("选择时间单位", time_units)
 
 # 根据用户选择的时间单位进行转换
