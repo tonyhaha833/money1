@@ -116,7 +116,22 @@ KBar_dic['amount']=np.array(KBar_amount_list)
 Date = start_date.strftime("%Y-%m-%d")
 
 st.subheader("設定一根 K 棒的時間長度(分鐘)")
-cycle_duration = st.number_input('輸入一根 K 棒的時間長度(單位:分鐘, 一日=1440分鐘)', value=1440,key="KBar_duration")
+import streamlit as st
+
+# 让用户选择时间单位的选项
+time_units = ["分钟", "小时", "天"]
+selected_unit = st.selectbox("选择时间单位", time_units)
+
+# 根据用户选择的时间单位进行转换
+if selected_unit == "分钟":
+    unit_conversion = 1
+elif selected_unit == "小时":
+    unit_conversion = 60
+else:
+    unit_conversion = 1440
+
+# 获取用户输入的 K 棒时间长度
+cycle_duration = st.number_input('输入一根 K 棒的时间长度（单位：{}）'.format(selected_unit), value=1, key="KBar_duration") * unit_conversion
 cycle_duration = int(cycle_duration)
 #cycle_duration = 1440   ## 可以改成你想要的 KBar 週期
 #KBar = indicator_f_Lo2.KBar(Date,'time',2)
