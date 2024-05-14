@@ -290,7 +290,7 @@ with st.expander("K線圖, 移動平均線"):
 
 
 ##### K線圖, RSI
-with st.expander("K線圖, 長短 RSI"):
+with st.expander("長短 RSI"):
     fig2 = make_subplots(specs=[[{"secondary_y": True}]])
     #### include candlestick with rangeselector
     fig2.add_trace(go.Candlestick(x=KBar_df['Time'],
