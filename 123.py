@@ -329,8 +329,8 @@ print(KBar_df.columns)
 
 
 # 计算布林带指标
-KBar_df['ma'] = KBar_df['close'].rolling(window=20).mean()  # 中轨，使用20日移动平均线
-KBar_df['std'] = KBar_df['close'].rolling(window=20).std()   # 计算收盘价的标准差
+KBar_df['ma'] = KBar_df['Close'].rolling(window=20).mean()  # 中轨，使用20日移动平均线
+KBar_df['std'] = KBar_df['Close'].rolling(window=20).std()   # 计算收盘价的标准差
 KBar_df['upper_band'] = KBar_df['ma'] + 2 * KBar_df['std']   # 上轨，使用2倍标准差
 KBar_df['lower_band'] = KBar_df['ma'] - 2 * KBar_df['std']   # 下轨，使用2倍标准差
 
