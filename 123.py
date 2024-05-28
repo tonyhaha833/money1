@@ -321,6 +321,8 @@ with st.expander("長短 RSI"):
     fig2.layout.yaxis2.showgrid=True
     st.plotly_chart(fig2, use_container_width=True)
 
+KBar_df.columns  # 查看列名
+
 # 计算布林带指标
 KBar_df['ma'] = KBar_df['close'].rolling(window=20).mean()  # 中轨，使用20日移动平均线
 KBar_df['std'] = KBar_df['close'].rolling(window=20).std()   # 计算收盘价的标准差
