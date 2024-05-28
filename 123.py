@@ -321,24 +321,6 @@ with st.expander("長短 RSI"):
     fig2.layout.yaxis2.showgrid=True
     st.plotly_chart(fig2, use_container_width=True)
 
-KBar_df.columns  # 查看列名
-KBar_df['MA_long'] = KBar_df['Close'].rolling(window=LongMAPeriod).mean()
-KBar_df['MA_short'] = KBar_df['Close'].rolling(window=ShortMAPeriod).mean()
-print(KBar_df.columns)
-
-
-
-# 计算布林带指标
-KBar_df['Ma'] = KBar_df['Close'].rolling(window=20).mean()  # 中轨，使用20日移动平均线
-KBar_df['Std'] = KBar_df['Close'].rolling(window=20).std()   # 计算收盘价的标准差
-KBar_df['Upper_band'] = KBar_df['Ma'] + 2 * KBar_df['Std']   # 上轨，使用2倍标准差
-KBar_df['Lower_band'] = KBar_df['Ma'] - 2 * KBar_df['Std']   # 下轨，使用2倍标准差
-
-# 添加布林带指标到图表中
-fig.add_trace(go.Scatter(x=KBar_df['Time'], y=KBar_df['Upper_band'], mode='lines', line=dict(color='red'), name='Upper Band'), secondary_y=True)
-fig.add_trace(go.Scatter(x=KBar_df['Time'], y=KBar_df['Ma'], mode='lines', line=dict(color='blue'), name='Middle Band'), secondary_y=True)
-fig.add_trace(go.Scatter(x=KBar_df['Time'], y=KBar_df['Lower_band'], mode='lines', line=dict(color='green'), name='Lower Band'), secondary_y=True)
-fig = make_subplots(specs=[[{"secondary_y": True}]])
 
 
 
