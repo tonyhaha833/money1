@@ -324,6 +324,8 @@ with st.expander("長短 RSI"):
 KBar_df.columns  # 查看列名
 KBar_df['MA_long'] = KBar_df['close'].rolling(window=LongMAPeriod).mean()
 KBar_df['MA_short'] = KBar_df['close'].rolling(window=ShortMAPeriod).mean()
+print(KBar_df.columns)
+
 
 
 # 计算布林带指标
