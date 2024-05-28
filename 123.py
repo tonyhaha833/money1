@@ -322,46 +322,6 @@ with st.expander("長短 RSI"):
     st.plotly_chart(fig2, use_container_width=True)
 
 
-# 示例代码，假设您已经记录了交易数据，保存在一个名为 trade_records 的列表中
-
-# 标记买入点和卖出点
-buy_signals = [(trade['time'], trade['price']) for trade in trade_records if trade['type'] == 'buy']
-sell_signals = [(trade['Time'], trade['Price']) for trade in trade_records if trade['type'] == 'sell']
-
-# 在图表中绘制交易信号
-fig.add_trace(go.Scatter(x=[x[0] for x in buy_signals], y=[x[1] for x in buy_signals], mode='markers', name='Buy Signal', marker=dict(color='green', size=10)))
-fig.add_trace(go.Scatter(x=[x[0] for x in sell_signals], y=[x[1] for x in sell_signals], mode='markers', name='Sell Signal', marker=dict(color='red', size=10)))
-
-# 更新图表布局
-fig.update_layout(
-    showlegend=True,
-    annotations=[
-        dict(
-            x=buy_signal[0], 
-            y=buy_signal[1], 
-            xref="x", yref="y", 
-            text="Buy", 
-            showarrow=True, 
-            arrowhead=5, 
-            ax=0, 
-            ay=-40
-        ) for buy_signal in buy_signals
-    ] + [
-        dict(
-            x=sell_signal[0], 
-            y=sell_signal[1], 
-            xref="x", yref="y", 
-            text="Sell", 
-            showarrow=True, 
-            arrowhead=5, 
-            ax=0, 
-            ay=40
-        ) for sell_signal in sell_signals
-    ]
-)
-
-# 显示图表
-st.plotly_chart(fig, use_container_width=True)
 
 
 
