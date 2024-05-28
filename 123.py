@@ -322,8 +322,8 @@ with st.expander("長短 RSI"):
     st.plotly_chart(fig2, use_container_width=True)
 
 KBar_df.columns  # 查看列名
-KBar_df['MA_long'] = KBar_df['close'].rolling(window=LongMAPeriod).mean()
-KBar_df['MA_short'] = KBar_df['close'].rolling(window=ShortMAPeriod).mean()
+KBar_df['MA_long'] = KBar_df['Close'].rolling(window=LongMAPeriod).mean()
+KBar_df['MA_short'] = KBar_df['Close'].rolling(window=ShortMAPeriod).mean()
 print(KBar_df.columns)
 
 
