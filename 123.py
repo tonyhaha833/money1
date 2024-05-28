@@ -326,7 +326,7 @@ with st.expander("長短 RSI"):
 
 
 
-
+print(KBar_df.columns)
 
 
 # 計算KDJ指標
