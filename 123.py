@@ -380,6 +380,39 @@ with st.expander("K線圖, KDJ指標, 實單交易策略"):
 
 
 
+# 計算布林通道指標
+def calculate_bollinger_bands(df, window=20, num_std_dev=2):
+    df['MA'] = df['Close'].rolling(window=window).mean()
+    df['std_dev'] = df['Close'].rolling(window=window).std()
+    df['upper_band'] = df['MA'] + (num_std_dev * df['std_dev'])
+    df['lower_band'] = df['MA'] - (num_std_dev * df['std_dev'])
+
+# 添加布林通道指標到KBar DataFrame中
+calculate_bollinger_bands(KBar_df)
+
+# 繪製包含布林通道指標的圖表
+with st.expander("K線圖, 布林通道"):
+    fig4 = make_subplots(specs=[[{"secondary_y": True}]])
+    
+    # K線圖
+    fig4.add_trace(go.Candlestick(x=KBar_df['Time'],
+                    open=KBar_df['Open'], high=KBar_df['High'],
+                    low=KBar_df['Low'], close=KBar_df['Close'], name='K線'),
+                   secondary_y=True)
+    
+    # 布林通道
+    fig4.add_trace(go.Scatter(x=KBar_df['Time'], y=KBar_df['upper_band'], mode='lines',line=dict(color='orange', width=2), name='Upper Band'), 
+                  secondary_y=False)
+    fig4.add_trace(go.Scatter(x=KBar_df['Time'], y=KBar_df['MA'], mode='lines',line=dict(color='blue', width=2), name='MA'), 
+                  secondary_y=False)
+    fig4.add_trace(go.Scatter(x=KBar_df['Time'], y=KBar_df['lower_band'], mode='lines',line=dict(color='purple', width=2), name='Lower Band'), 
+                  secondary_y=False)
+    
+    fig4.layout.yaxis2.showgrid=True
+    st.plotly_chart(fig4, use_container_width=True)
+
+
+
 
 
 
