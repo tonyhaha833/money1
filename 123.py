@@ -338,6 +338,7 @@ KBar_df['Lower_band'] = KBar_df['Ma'] - 2 * KBar_df['Std']   # 下轨，使用2�
 fig.add_trace(go.Scatter(x=KBar_df['Time'], y=KBar_df['Upper_band'], mode='lines', line=dict(color='red'), name='Upper Band'), secondary_y=True)
 fig.add_trace(go.Scatter(x=KBar_df['Time'], y=KBar_df['Ma'], mode='lines', line=dict(color='blue'), name='Middle Band'), secondary_y=True)
 fig.add_trace(go.Scatter(x=KBar_df['Time'], y=KBar_df['Lower_band'], mode='lines', line=dict(color='green'), name='Lower Band'), secondary_y=True)
+fig = make_subplots(specs=[[{"secondary_y": True}]])
 
 
 
