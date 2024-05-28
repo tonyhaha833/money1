@@ -323,7 +323,9 @@ with st.expander("長短 RSI"):
 
 
 
-
+RSVPeriod = 14
+KPeriod = 3
+DPeriod = 3
 
 
 # 在你的程式碼中加入以下部分以計算 KDJ 值
@@ -342,9 +344,6 @@ def GetKDJ(self, RSVPeriod, KPeriod, DPeriod):
     J = [3 * K[i] - 2 * D[i] for i in range(len(D))]
     
     return K, D, J
-RSVPeriod = 14
-KPeriod = 3
-DPeriod = 3
 KValue, DValue, JValue = KBar.GetKDJ(RSVPeriod, KPeriod, DPeriod)
 
 # 在你的交易判斷中，根據 KDJ 值進行相應的操作
