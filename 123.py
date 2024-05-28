@@ -372,6 +372,58 @@ fig1.add_trace(go.Scatter(x=KBar_df['Time'], y=KBar_df['J'], mode='lines', line=
 fig1.add_trace(go.Scatter(x=KBar_df['Time'], y=KBar_df['upper_band'], mode='lines', line=dict(color='orange', width=1), name='布林通道上界'), secondary_y=False)
 fig1.add_trace(go.Scatter(x=KBar_df['Time'], y=KBar_df['lower_band'], mode='lines', line=dict(color='purple', width=1), name='布林通道下界'), secondary_y=False)
 
+import streamlit as st
+import pandas as pd
+import plotly.graph_objects as go
+from plotly.subplots import make_subplots
+
+# 定義計算KDJ和布林通道的函數
+def calculate_kdj(df, window=14):
+    # 實現計算KDJ的邏輯
+    return df
+
+def calculate_bollinger_bands(df, window=20, num_std=2):
+    # 實現計算布林通道的邏輯
+    return df
+
+# 定義畫圖函數
+def plot_chart(KBar_df):
+    fig1 = make_subplots(specs=[[{"secondary_y": True}]])
+    
+    # 在K線圖上加入KDJ指標
+    fig1.add_trace(go.Scatter(x=KBar_df['Time'], y=KBar_df['K'], mode='lines', line=dict(color='green', width=2), name='K值'), secondary_y=True)
+    fig1.add_trace(go.Scatter(x=KBar_df['Time'], y=KBar_df['D'], mode='lines', line=dict(color='red', width=2), name='D值'), secondary_y=True)
+    fig1.add_trace(go.Scatter(x=KBar_df['Time'], y=KBar_df['J'], mode='lines', line=dict(color='blue', width=2), name='J值'), secondary_y=True)
+
+    # 在K線圖上加入布林通道
+    fig1.add_trace(go.Scatter(x=KBar_df['Time'], y=KBar_df['upper_band'], mode='lines', line=dict(color='orange', width=1), name='布林通道上界'), secondary_y=False)
+    fig1.add_trace(go.Scatter(x=KBar_df['Time'], y=KBar_df['lower_band'], mode='lines',  line=dict(color='purple', width=1), name='布林通道下界'), secondary_y=False)
+    
+    st.plotly_chart(fig1)
+
+# 加載數據
+@st.cache
+def load_data():
+    # 加載你的數據
+    return pd.DataFrame()
+
+def main():
+    st.title('金融資料視覺化呈現')
+    
+    # 加載數據
+    KBar_df = load_data()
+    
+    # 計算KDJ和布林通道
+    KBar_df = calculate_kdj(KBar_df)
+    KBar_df = calculate_bollinger_bands(KBar_df)
+    
+    # 繪製圖表
+    plot_chart(KBar_df)
+
+if __name__ == "__main__":
+    main()
+
+
 
 
 
