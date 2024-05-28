@@ -323,64 +323,36 @@ with st.expander("長短 RSI"):
 
 
 
-class KBar:
-    def __init__(self, date, cycle_duration):
-        self.date = date
-        self.cycle_duration = cycle_duration
-        # 其他初始化操作
-        
-    def AddPrice(self, time, open_price, close_price, low_price, high_price, volume):
-        # 添加價格到K棒
-        pass  # 你需要實現這個方法
-        
-    def GetKDJ(self, RSVPeriod, KPeriod, DPeriod):
-        # 計算KDJ值
-        pass  # 你需要實現這個方法
+# 计算KDJ指标数值
+def calculate_kdj(df, window=9):
+    high_max = df['high'].rolling(window=window).max()
+    low_min = df['low'].rolling(window=window).min()
+
+    rsv = (df['close'] - low_min) / (high_max - low_min) * 100
+    k_value = rsv.ewm(span=3, adjust=False).mean()
+    d_value = k_value.ewm(span=3, adjust=False).mean()
+    j_value = 3 * k_value - 2 * d_value
+
+    return k_value, d_value, j_value
+
+KBar_df['K'], KBar_df['D'], KBar_df['J'] = calculate_kdj(KBar_df)
+
+# 绘制KDJ指标图
+with st.expander("KDJ指标"):
+    fig3 = make_subplots(specs=[[{"secondary_y": True}]])
+    fig3.add_trace(go.Candlestick(x=KBar_df['Time'],
+                    open=KBar_df['Open'], high=KBar_df['High'],
+                    low=KBar_df['Low'], close=KBar_df['Close'], name='K線'),
+                   secondary_y=True)
+    fig3.add_trace(go.Scatter(x=KBar_df['Time'], y=KBar_df['K'], mode='lines', line=dict(color='green', width=2), name='K值'), secondary_y=False)
+    fig3.add_trace(go.Scatter(x=KBar_df['Time'], y=KBar_df['D'], mode='lines', line=dict(color='blue', width=2), name='D值'), secondary_y=False)
+    fig3.add_trace(go.Scatter(x=KBar_df['Time'], y=KBar_df['J'], mode='lines', line=dict(color='red', width=2), name='J值'), secondary_y=False)
+
+    fig3.layout.yaxis2.showgrid=True
+    st.plotly_chart(fig3, use_container_width=True)
 
 
-KBar = indicator_forKBar_short.KBar(Date, cycle_duration)
-KValue, DValue, JValue = KBar.GetKDJ(RSVPeriod, KPeriod, DPeriod)
 
-# 在你的交易判斷中，根據 KDJ 值進行相應的操作
-
-# 若 K 值大於 D 值且 J 值大於某個閾值，買進多單
-if LastK > LastD and JValue > threshold:
-    # 你的多單進場程式碼
-    # 寫入紀錄至部位管理物件
-    OrderInfoTime = datetime.datetime.strptime(str(Tick_dic['DateTime'][-1]), '%Y-%m-%d %H:%M:%S.%f')
-    OrderInfoPrice = UpDown_dic['UpPrice'][-1][2]
-    OrderProd = Tick_dic['Product'][-1]
-    OrderQty = O_B_Qty
-    RC.Order('B', OrderProd, OrderInfoTime, OrderInfoPrice, OrderQty)
-    # 紀錄移動停損停利價位
-    StopLossPoint_B = max(OrderInfoPrice - StopLoss, StopLossPoint_B)
-    print('產品:', OrderProd, ', 多單進場買進時間:', OrderInfoTime, ', 買進價格:', OrderInfoPrice, ', 停損價位:', StopLossPoint_B,
-          ', 多單買進口數:', OrderQty)
-    print()
-    msg = '產品: ' + OrderProd + '; 多單買進時間: ' + str(OrderInfoTime) + '; 買進價格: ' + str(OrderInfoPrice) + '; 多單買進口數: ' + str(
-        OrderQty)
-    lineTool.lineNotify(token, msg)
-
-# 若 K 值小於 D 值且 J 值小於某個閾值，買進空單
-elif LastK < LastD and JValue < threshold:
-    # 你的空單進場程式碼
-    # 寫入紀錄至部位管理物件
-    OrderInfoTime = datetime.datetime.strptime(str(Tick_dic['DateTime'][-1]), '%Y-%m-%d %H:%M:%S.%f')
-    OrderInfoPrice = UpDown_dic['DownPrice'][-1][2]
-    OrderProd = Tick_dic['Product'][-1]
-    OrderQty = O_S_Qty
-    RC.Order('S', OrderProd, OrderInfoTime, OrderInfoPrice, OrderQty)
-    # 紀錄移動停損停利價位
-    StopLossPoint_S = min(OrderInfoPrice + StopLoss, StopLossPoint_S)
-    print('產品:', OrderProd, ', 空單買進時間:', OrderInfoTime, ', 買進價格:', OrderInfoPrice, ', 停損價位:', StopLossPoint_S,
-          ', 空單買進口數:', OrderQty)
-    print()
-    msg = '產品: ' + OrderProd + '; 空單買進時間: ' + str(OrderInfoTime) + '; 買進價格: ' + str(OrderInfoPrice) + '; 空單買進口數: ' + str(
-        OrderQty)
-    lineTool.lineNotify(token, msg)
-
-# 在多單或空單出場判斷中，根據相應的條件進行判斷
-# 若條件成立，執行相應的出場程式碼
 
 
 
