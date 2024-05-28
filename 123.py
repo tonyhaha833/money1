@@ -327,6 +327,22 @@ with st.expander("長短 RSI"):
 
 
 
+# 在你目前的程式碼中，加入以下部分以計算 KDJ 值
+
+# 取得KDJ值
+KValue, DValue, JValue = KBar.GetKDJ(RSVPeriod, KPeriod, DPeriod)
+
+# 在你的交易判斷中，根據 KDJ 值進行相應的操作
+
+# 若 K 值大於 D 值且 J 值大於某個閾值，買進多單
+if LastK > LastD and JValue > threshold:
+    # 你的多單進場程式碼
+
+# 若 K 值小於 D 值且 J 值小於某個閾值，買進空單
+elif LastK < LastD and JValue < threshold:
+    # 你的空單進場程式碼
+
+# 在多單或空單出場判斷中，根據相應的條件進行判斷
 
 
 
