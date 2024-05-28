@@ -321,112 +321,16 @@ with st.expander("長短 RSI"):
     fig2.layout.yaxis2.showgrid=True
     st.plotly_chart(fig2, use_container_width=True)
 
-import numpy as np
+# 计算布林带指标
+KBar_df['MA'] = KBar_df['close'].rolling(window=20).mean()  # 中轨，使用20日移动平均线
+KBar_df['std'] = KBar_df['close'].rolling(window=20).std()   # 计算收盘价的标准差
+KBar_df['upper_band'] = KBar_df['MA'] + 2 * KBar_df['std']   # 上轨，使用2倍标准差
+KBar_df['lower_band'] = KBar_df['MA'] - 2 * KBar_df['std']   # 下轨，使用2倍标准差
 
-def calculate_kdj(df, window=14):
-    high = df['High']
-    low = df['Low']
-    close = df['Close']
-    
-    # 計算K值
-    rsv = (close - df['Low'].rolling(window=window).min()) / (df['High'].rolling(window=window).max() - df['Low'].rolling(window=window).min()) * 100
-    df['K'] = rsv.ewm(com=2).mean()
-    
-    # 計算D值
-    df['D'] = df['K'].ewm(com=2).mean()
-    
-    # 計算J值
-    df['J'] = 3 * df['K'] - 2 * df['D']
-    
-    return df
-
-def calculate_bollinger_bands(df, window=20, num_std=2):
-    close = df['Close']
-    
-    # 計算移動平均線
-    df['MA'] = close.rolling(window=window).mean()
-    
-    # 計算標準差
-    df['std'] = close.rolling(window=window).std()
-    
-    # 計算布林通道的上下界
-    df['upper_band'] = df['MA'] + num_std * df['std']
-    df['lower_band'] = df['MA'] - num_std * df['std']
-    
-    return df
-
-# 在適當的位置調用函數
-KBar_df = calculate_kdj(KBar_df)
-KBar_df = calculate_bollinger_bands(KBar_df)
-
-# 修改畫圖部分以顯示KDJ指標和布林通道
-# 這裡提供的程式碼示例只是一個指導，你需要根據你原有的程式碼結構進行修改。
-# 假設你已經在K線圖的基礎上畫出了移動平均線，你可以在同一個圖中添加KDJ指標和布林通道。
-
-# 畫出KDJ指標
-fig1.add_trace(go.Scatter(x=KBar_df['Time'], y=KBar_df['K'], mode='lines', line=dict(color='green', width=2), name='K值'), secondary_y=True)
-fig1.add_trace(go.Scatter(x=KBar_df['Time'], y=KBar_df['D'], mode='lines', line=dict(color='red', width=2), name='D值'), secondary_y=True)
-fig1.add_trace(go.Scatter(x=KBar_df['Time'], y=KBar_df['J'], mode='lines', line=dict(color='blue', width=2), name='J值'), secondary_y=True)
-
-# 畫出布林通道
-fig1.add_trace(go.Scatter(x=KBar_df['Time'], y=KBar_df['upper_band'], mode='lines', line=dict(color='orange', width=1), name='布林通道上界'), secondary_y=False)
-fig1.add_trace(go.Scatter(x=KBar_df['Time'], y=KBar_df['lower_band'], mode='lines', line=dict(color='purple', width=1), name='布林通道下界'), secondary_y=False)
-
-import streamlit as st
-import pandas as pd
-import plotly.graph_objects as go
-from plotly.subplots import make_subplots
-
-# 定義計算KDJ和布林通道的函數
-def calculate_kdj(df, window=14):
-    # 實現計算KDJ的邏輯
-    return df
-
-def calculate_bollinger_bands(df, window=20, num_std=2):
-    # 實現計算布林通道的邏輯
-    return df
-
-# 定義畫圖函數
-def plot_chart(KBar_df):
-    fig1 = make_subplots(specs=[[{"secondary_y": True}]])
-    
-    # 在K線圖上加入KDJ指標
-    fig1.add_trace(go.Scatter(x=KBar_df['Time'], y=KBar_df['K'], mode='lines', line=dict(color='green', width=2), name='K值'), secondary_y=True)
-    fig1.add_trace(go.Scatter(x=KBar_df['Time'], y=KBar_df['D'], mode='lines', line=dict(color='red', width=2), name='D值'), secondary_y=True)
-    fig1.add_trace(go.Scatter(x=KBar_df['Time'], y=KBar_df['J'], mode='lines', line=dict(color='blue', width=2), name='J值'), secondary_y=True)
-
-    # 在K線圖上加入布林通道
-    fig1.add_trace(go.Scatter(x=KBar_df['Time'], y=KBar_df['upper_band'], mode='lines', line=dict(color='orange', width=1), name='布林通道上界'), secondary_y=False)
-    fig1.add_trace(go.Scatter(x=KBar_df['Time'], y=KBar_df['lower_band'], mode='lines',  line=dict(color='purple', width=1), name='布林通道下界'), secondary_y=False)
-    
-    st.plotly_chart(fig1)
-
-# 加載數據
-@st.cache
-def load_data():
-    # 加載你的數據
-    return pd.DataFrame()
-
-def main():
-    st.title('金融資料視覺化呈現')
-    
-    # 加載數據
-    KBar_df = load_data()
-    
-    # 計算KDJ和布林通道
-    KBar_df = calculate_kdj(KBar_df)
-    KBar_df = calculate_bollinger_bands(KBar_df)
-    
-    # 繪製圖表
-    plot_chart(KBar_df)
-
-if __name__ == "__main__":
-    main()
-
-
-
-
-
+# 添加布林带指标到图表中
+fig.add_trace(go.Scatter(x=KBar_df['time'], y=KBar_df['upper_band'], mode='lines', line=dict(color='red'), name='Upper Band'), secondary_y=True)
+fig.add_trace(go.Scatter(x=KBar_df['time'], y=KBar_df['MA'], mode='lines', line=dict(color='blue'), name='Middle Band'), secondary_y=True)
+fig.add_trace(go.Scatter(x=KBar_df['time'], y=KBar_df['lower_band'], mode='lines', line=dict(color='green'), name='Lower Band'), secondary_y=True)
 
 
 
