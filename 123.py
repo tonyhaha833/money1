@@ -328,7 +328,6 @@ with st.expander("長短 RSI"):
 
 # 在你的程式碼中加入以下部分以計算 KDJ 值
 # 取得KDJ值
-KValue, DValue, JValue = KBar.GetKDJ(RSVPeriod, KPeriod, DPeriod)
 def GetKDJ(self, RSVPeriod, KPeriod, DPeriod):
     # 先計算 RSV 值
     RSV = [(self.Close[i] - min(self.Low[i- RSVPeriod+1 : i+1])) / (max(self.High[i- RSVPeriod+1 : i+1]) - min(self.Low[i- RSVPeriod+1 : i+1])) * 100 for i in range(RSVPeriod-1, len(self.Close))]
@@ -344,7 +343,7 @@ def GetKDJ(self, RSVPeriod, KPeriod, DPeriod):
     
     return K, D, J
 
-
+KValue, DValue, JValue = KBar.GetKDJ(RSV, K, D)
 # 在你的交易判斷中，根據 KDJ 值進行相應的操作
 
 # 若 K 值大於 D 值且 J 值大於某個閾值，買進多單
