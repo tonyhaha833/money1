@@ -58,7 +58,7 @@ end_date = datetime.datetime.strptime(end_date,'%Y-%m-%d')
 # 使用条件筛选选择时间区间的数据
 df = df_original[(df_original['time'] >= start_date) & (df_original['time'] <= end_date)]
 
-KBar = indicator_forKBar_short.KBar(Date,cycle_duration)
+
 ###### (2) 轉化為字典 ######:
 KBar_dic = df.to_dict()
 #type(KBar_dic)
@@ -344,7 +344,7 @@ def GetKDJ(self, RSVPeriod, KPeriod, DPeriod):
     J = [3 * K[i] - 2 * D[i] for i in range(len(D))]
     
     return K, D, J
-KValue, DValue, JValue = KBar.GetKDJ(RSVPeriod, KPeriod, DPeriod)
+KValue, DValue, JValue =GetKDJ(RSVPeriod, KPeriod, DPeriod)
 
 # 在你的交易判斷中，根據 KDJ 值進行相應的操作
 
