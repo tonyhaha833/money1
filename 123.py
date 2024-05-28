@@ -329,6 +329,21 @@ with st.expander("長短 RSI"):
 # 在你的程式碼中加入以下部分以計算 KDJ 值
 # 取得KDJ值
 KValue, DValue, JValue = KBar.GetKDJ(RSVPeriod, KPeriod, DPeriod)
+def GetKDJ(self, RSVPeriod, KPeriod, DPeriod):
+    # 先計算 RSV 值
+    RSV = [(self.Close[i] - min(self.Low[i- RSVPeriod+1 : i+1])) / (max(self.High[i- RSVPeriod+1 : i+1]) - min(self.Low[i- RSVPeriod+1 : i+1])) * 100 for i in range(RSVPeriod-1, len(self.Close))]
+    
+    # 計算 K 值（RSV 的 n 日移動平均）
+    K = [sum(RSV[i-KPeriod+1:i+1]) / KPeriod for i in range(KPeriod-1, len(RSV))]
+    
+    # 計算 D 值（K 的 m 日移動平均）
+    D = [sum(K[i-DPeriod+1:i+1]) / DPeriod for i in range(DPeriod-1, len(K))]
+    
+    # 計算 J 值（3K - 2D）
+    J = [3 * K[i] - 2 * D[i] for i in range(len(D))]
+    
+    return K, D, J
+
 
 # 在你的交易判斷中，根據 KDJ 值進行相應的操作
 
