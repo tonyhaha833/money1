@@ -331,9 +331,9 @@ print(KBar_df.columns)
 
 # 計算KDJ指標
 def calculate_kdj(df, n=9, m1=3, m2=3):
-    df['low_min'] = df['low'].rolling(window=n, min_periods=1).min()
-    df['high_max'] = df['high'].rolling(window=n, min_periods=1).max()
-    df['rsv'] = (df['close'] - df['low_min']) / (df['high_max'] - df['low_min']) * 100
+    df['low_min'] = df['Low'].rolling(window=n, min_periods=1).min()
+    df['high_max'] = df['High'].rolling(window=n, min_periods=1).max()
+    df['rsv'] = (df['Close'] - df['low_min']) / (df['high_max'] - df['low_min']) * 100
     df['k'] = df['rsv'].ewm(com=m1 - 1, adjust=False).mean()
     df['d'] = df['k'].ewm(com=m2 - 1, adjust=False).mean()
     df['j'] = 3 * df['k'] - 2 * df['d']
