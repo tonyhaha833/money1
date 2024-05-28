@@ -325,7 +325,7 @@ with st.expander("長短 RSI"):
 # 示例代码，假设您已经记录了交易数据，保存在一个名为 trade_records 的列表中
 
 # 标记买入点和卖出点
-buy_signals = [(trade['Time'], trade['Price']) for trade in trade_records if trade['type'] == 'buy']
+buy_signals = [(trade['time'], trade['price']) for trade in trade_records if trade['type'] == 'buy']
 sell_signals = [(trade['Time'], trade['Price']) for trade in trade_records if trade['type'] == 'sell']
 
 # 在图表中绘制交易信号
