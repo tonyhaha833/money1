@@ -323,7 +323,7 @@ with st.expander("長短 RSI"):
 
 
 
-RSVPeriod = 14
+RSVPeriod = 9
 KPeriod = 3
 DPeriod = 3
 
