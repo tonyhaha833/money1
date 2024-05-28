@@ -336,9 +336,9 @@ KBar_df['lower_band'] = KBar_df['ma'] - 2 * KBar_df['std']   # 下轨，使用2�
 
 
 # 添加布林带指标到图表中
-fig.add_trace(go.Scatter(x=KBar_df['time'], y=KBar_df['upper_band'], mode='lines', line=dict(color='red'), name='Upper Band'), secondary_y=True)
-fig.add_trace(go.Scatter(x=KBar_df['time'], y=KBar_df['MA'], mode='lines', line=dict(color='blue'), name='Middle Band'), secondary_y=True)
-fig.add_trace(go.Scatter(x=KBar_df['time'], y=KBar_df['lower_band'], mode='lines', line=dict(color='green'), name='Lower Band'), secondary_y=True)
+fig.add_trace(go.Scatter(x=KBar_df['Time'], y=KBar_df['upper_band'], mode='lines', line=dict(color='red'), name='Upper Band'), secondary_y=True)
+fig.add_trace(go.Scatter(x=KBar_df['Time'], y=KBar_df['MA'], mode='lines', line=dict(color='blue'), name='Middle Band'), secondary_y=True)
+fig.add_trace(go.Scatter(x=KBar_df['Time'], y=KBar_df['lower_band'], mode='lines', line=dict(color='green'), name='Lower Band'), secondary_y=True)
 
 
 
