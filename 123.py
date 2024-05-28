@@ -326,13 +326,6 @@ with st.expander("長短 RSI"):
 
 
 
-import os
-import numpy as np
-import pandas as pd
-import streamlit as st
-import streamlit.components.v1 as stc
-import datetime
-from talib.abstract import *
 
 
 
