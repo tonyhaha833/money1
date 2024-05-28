@@ -322,6 +322,9 @@ with st.expander("長短 RSI"):
     st.plotly_chart(fig2, use_container_width=True)
 
 KBar_df.columns  # 查看列名
+KBar_df['MA_long'] = KBar_df['close'].rolling(window=LongMAPeriod).mean()
+KBar_df['MA_short'] = KBar_df['close'].rolling(window=ShortMAPeriod).mean()
+
 
 # 计算布林带指标
 KBar_df['ma'] = KBar_df['close'].rolling(window=20).mean()  # 中轨，使用20日移动平均线
