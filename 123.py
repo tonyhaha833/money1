@@ -342,8 +342,8 @@ def GetKDJ(self, RSVPeriod, KPeriod, DPeriod):
     J = [3 * K[i] - 2 * D[i] for i in range(len(D))]
     
     return K, D, J
+KValue, DValue, JValue = KBar.GetKDJ(RSVPeriod, KPeriod, DPeriod)
 
-KValue, DValue, JValue = KBar.GetKDJ(RSV, K, D)
 # 在你的交易判斷中，根據 KDJ 值進行相應的操作
 
 # 若 K 值大於 D 值且 J 值大於某個閾值，買進多單
