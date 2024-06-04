@@ -32,6 +32,7 @@ def load_data(url):
 df_original = load_data('testdata.pkl')
 
 import datetime
+st.write("df_original['time'] 列的类型:", df_original['time'].dtype)
 
 # 确保 DataFrame 中包含名为 'time' 的列
 if 'time' not in df_original.columns:
