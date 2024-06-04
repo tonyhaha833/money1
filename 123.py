@@ -161,6 +161,7 @@ KBar_dic = {}
 # KBar_dic['volume'] =  Volume_array
 
  ## 形成 KBar 字典 (新週期的):
+kbar_instance = KBar()
 KBar_dic['time'] =  KBar.TAKBar['time']   
 #KBar_dic['product'] =  KBar.TAKBar['product']
 KBar_dic['product'] = np.repeat('tsmc', KBar_dic['time'].size)
