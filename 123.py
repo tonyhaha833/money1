@@ -39,7 +39,7 @@ def load_data(url):
 df_original = pd.read_pickle('testdata.pkl')
 
 #df.columns  ## Index(['Unnamed: 0', 'time', 'open', 'low', 'high', 'close', 'volume','amount'], dtype='object')
-df_original = df_original.drop('Unnamed: 0',axis=1)
+#df_original = df_original.drop('Unnamed: 0',axis=1)
 #df.columns  ## Index(['time', 'open', 'low', 'high', 'close', 'volume', 'amount'], dtype='object')
 #df['time']
 #type(df['time'])  ## pandas.core.series.Series
