@@ -15,10 +15,6 @@ html_temp = """
     </div>
     """
 stc.html(html_temp)
-
-## 保存为Pickle文件:
-df_original.to_pickle('testdata.pkl')
-
 ## 读取Pickle文件
 @st.cache_data(ttl=3600, show_spinner="正在加载数据")
 def load_data(url):
