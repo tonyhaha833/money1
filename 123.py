@@ -22,7 +22,7 @@ def load_data(url):
     return df
 df_original = load_data('testdata.pkl')
 
-df_original = df_original.drop('Unnamed: 0', axis=1)
+#df_original = df_original.drop('Unnamed: 0', axis=1)
 
 ##### 選擇資料區間
 st.subheader("選擇開始與結束的日期, 區間:2022-01-03 至 2022-11-18")
