@@ -10,8 +10,8 @@ import streamlit.components.v1 as stc
 
 ###### (1) 開始設定 ######
 html_temp = """
-		<div style="background-color:#3872fb;padding:10px;border-radius:10px">
-		<h1 style="color:white;text-align:center;">金融資料視覺化呈現 (金融看板) </h1>
+		<div style="background-color:#808080;padding:10px;border-radius:10px">
+		<h1 style="color:white;text-align:center;">金融資料視覺化呈現0050 (金融看板) </h1>
 		<h2 style="color:white;text-align:center;">Financial Dashboard </h2>
 		</div>
 		"""
@@ -31,7 +31,7 @@ def load_data(url):
 ## 读取Pickle文件
 df_original = load_data('testdata.pkl')
 
-df_original = df_original.drop('Unnamed: 0',axis=1)
+#df_original = df_original.drop('Unnamed: 0',axis=1)
 
 
 st.subheader("選擇開始與結束的日期, 區間:2019-01-02 至 2024-04-30")
