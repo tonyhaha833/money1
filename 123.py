@@ -55,6 +55,8 @@ else:
     except ValueError:
         st.error("日期格式不正确，请输入正确的日期格式，例如：2019-01-02。")
 
+st.write("start_date 类型:", type(start_date), "值:", start_date)
+st.write("end_date 类型:", type(end_date), "值:", end_date)
 
 
 st.subheader("選擇開始與結束的日期, 區間:2019-01-02 至 2024-04-30")
