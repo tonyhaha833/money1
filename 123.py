@@ -133,15 +133,15 @@ for i in range(KBar_dic['time'].size):
 
 
 
-KBar_dic = {} 
-KBar_dic['time'] =  KBar.TAKBar['time']   
+#KBar_dic = {} 
+#KBar_dic['time'] =  KBar.TAKBar['time']   
 #KBar_dic['product'] =  KBar.TAKBar['product']
-KBar_dic['product'] = np.repeat('tsmc', KBar_dic['time'].size)
-KBar_dic['open'] = KBar.TAKBar['open']
-KBar_dic['high'] =  KBar.TAKBar['high']
-KBar_dic['low'] =  KBar.TAKBar['low']
-KBar_dic['close'] =  KBar.TAKBar['close']
-KBar_dic['volume'] =  KBar.TAKBar['volume']
+#KBar_dic['product'] = np.repeat('tsmc', KBar_dic['time'].size)
+#KBar_dic['open'] = KBar.TAKBar['open']
+#KBar_dic['high'] =  KBar.TAKBar['high']
+#KBar_dic['low'] =  KBar.TAKBar['low']
+#KBar_dic['close'] =  KBar.TAKBar['close']
+#KBar_dic['volume'] =  KBar.TAKBar['volume']
 
 #
 ######  改變 KBar 時間長度 (以上)  ########
