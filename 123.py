@@ -35,8 +35,6 @@ stc.html(html_temp)
 @st.cache_data(ttl=3600,show_spinner="正在加載資料")
 def load_data(url):
     df = pd.read_pickle(url)
-    # 删除 'Unnamed: 0' 列
-    df.drop('Unnamed: 0', axis=1, inplace=True)
     return df
 
 ## 读取Pickle文件
