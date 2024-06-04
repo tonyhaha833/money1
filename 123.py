@@ -133,42 +133,17 @@ for i in range(KBar_dic['time'].size):
 
 
     
-    # 更新K棒才判斷，若要逐筆判斷則 註解下面兩行, 因為計算 MA是利用收盤價, 而在 KBar class 中的 "TimeAdd"函數方法中, 收盤價只是一直附加最新的 price 而已.
-    #if tag != 1:
-        #continue
-    #print(KBar.Time,KBar.GetOpen(),KBar.GetHigh(),KBar.GetLow(),KBar.GetClose(),KBar.GetVolume()) 
-    
-    
-        
-# #type(KBar.Time[1:-1]) ##numpy.ndarray       
-# Time_array =  np.append(Time_array, KBar.Time[1:-1])    
-# Open_array =  np.append(Open_array,KBar.Open[1:-1])
-# High_array =  np.append(High_array,KBar.High[1:-1])
-# Low_array =  np.append(Low_array,KBar.Low[1:-1])
-# Close_array =  np.append(Close_array,KBar.Close[1:-1])
-# Volume_array =  np.append(Volume_array,KBar.Volume[1:-1])
-# Product_array = np.append(Product_array,KBar.Prod[1:-1])
-
 KBar_dic = {}
-
-
-
-kbar_instance = KBar()
-TAKBar_data = kbar_instance.TAKBar()  # 调用TAKBar方法获取数据
-
-# 访问TAKBar属性，并获取其中的'time'数据，然后赋值给KBar_dic['time']
-KBar_dic['time'] = kbar_instance.TAKBar['time']
-
-# 为KBar_dic['product']赋值为 'tsmc' 的重复值，数量与KBar_dic['time']中的数据量相同
-KBar_dic['product'] = np.repeat('tsmc', len(KBar_dic['time']))
-
-# 获取KBar.TAKBar中的数据，并赋值给相应的键
-KBar_dic['open'] = kbar_instance.TAKBar['open']
-KBar_dic['high'] = kbar_instance.TAKBar['high']
-KBar_dic['low'] = kbar_instance.TAKBar['low']
-KBar_dic['close'] = kbar_instance.TAKBar['close']
-KBar_dic['volume'] = kbar_instance.TAKBar['volume']
-
+ ## 形成 KBar 字典 (新週期的):
+KBar_dic['time'] =  KBar.TAKBar['time']   
+#KBar_dic['product'] =  KBar.TAKBar['product']
+KBar_dic['product'] = np.repeat('tsmc', KBar_dic['time'].size)
+KBar_dic['open'] = KBar.TAKBar['open']
+KBar_dic['high'] =  KBar.TAKBar['high']
+KBar_dic['low'] =  KBar.TAKBar['low']
+KBar_dic['close'] =  KBar.TAKBar['close']
+KBar_dic['volume'] =  KBar.TAKBar['volume']
+#
 ######  改變 KBar 時間長度 (以上)  ########
 
 
