@@ -114,34 +114,35 @@ class KBar:
         # 在这里实现向KBar对象中添加价格数据的逻辑
         pass
 
-# 创建KBar对象的实例
+
 kbar_instance = KBar()
 
+# 获取数据
+TAKBar_data = kbar_instance.TAKBar()
+
 # 循环遍历KBar_dic中的数据，并使用KBar对象的实例调用AddPrice方法
-for i in range(KBar_dic['time'].size):
+for i in range(TAKBar_data['time'].size):
     
-    time = KBar_dic['time'][i]
-    open_price = KBar_dic['open'][i]
-    close_price = KBar_dic['close'][i]
-    low_price = KBar_dic['low'][i]
-    high_price = KBar_dic['high'][i]
-    qty = KBar_dic['volume'][i]
-    amount = KBar_dic['amount'][i]
+    time = TAKBar_data['time'][i]
+    open_price = TAKBar_data['open'][i]
+    close_price = TAKBar_data['close'][i]
+    low_price = TAKBar_data['low'][i]
+    high_price = TAKBar_data['high'][i]
+    qty = TAKBar_data['volume'][i]
     
     # 使用KBar对象的实例调用AddPrice方法
     tag = kbar_instance.AddPrice(time, open_price, close_price, low_price, high_price, qty)
 
+# 新周期的数据
+KBar_dic = {}
+KBar_dic['time'] =  TAKBar_data['time']   
+KBar_dic['product'] = np.repeat('tsmc', TAKBar_data['time'].size)
+KBar_dic['open'] = TAKBar_data['open']
+KBar_dic['high'] =  TAKBar_data['high']
+KBar_dic['low'] =  TAKBar_data['low']
+KBar_dic['close'] =  TAKBar_data['close']
+KBar_dic['volume'] =  TAKBar_data['volume']
 
-
-#KBar_dic = {} 
-#KBar_dic['time'] =  KBar.TAKBar['time']   
-#KBar_dic['product'] =  KBar.TAKBar['product']
-#KBar_dic['product'] = np.repeat('tsmc', KBar_dic['time'].size)
-#KBar_dic['open'] = KBar.TAKBar['open']
-#KBar_dic['high'] =  KBar.TAKBar['high']
-#KBar_dic['low'] =  KBar.TAKBar['low']
-#KBar_dic['close'] =  KBar.TAKBar['close']
-#KBar_dic['volume'] =  KBar.TAKBar['volume']
 
 #
 ######  改變 KBar 時間長度 (以上)  ########
