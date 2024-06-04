@@ -140,7 +140,7 @@ import plotly.offline as pyoff
 ##### K線圖, 移動平均線 MA
 with st.expander("K線圖, 移動平均線"):
     fig1 = make_subplots(specs=[[{"secondary_y": True}]])
-    fig1.add_trace(go.Candlestick(x=KBar_df['Time'],
+    fig1.add_trace(go.Candlestick(x=KBar_df['time'],
                     open=KBar_df['open'], high=KBar_df['high'],
                     low=KBar_df['low'], close=KBar_df['close'], name='K線'),
                    secondary_y=True)
