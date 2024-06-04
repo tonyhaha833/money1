@@ -42,10 +42,7 @@ df_original = load_data('testdata.pkl')
 #df_original = df_original.drop('Unnamed: 0',axis=1)
 
 ##### 選擇資料區間
-st.subheader("選擇開始與結束的日期, 區間:2019-01-01 至 2024-4-30")
 start_date = st.text_input('選擇開始日期 (日期格式: 2019-01-01)', '2024-04-30')
-start_date = pd.to_datetime(start_date)
-end_date = pd.to_datetime(end_date)
 end_date = st.text_input('選擇結束日期 (日期格式: 2019-01-01)', '2024-04-30')
 start_date = datetime.datetime.strptime(start_date,'%Y-%m-%d')
 end_date = datetime.datetime.strptime(end_date,'%Y-%m-%d')
