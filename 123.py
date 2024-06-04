@@ -194,3 +194,10 @@ with st.expander("K線圖, RSI, MA"):
     fig4.update_yaxes(title_text="價格", secondary_y=True)
     fig4.update_yaxes(title_text="交易量", secondary_y=False)
     st.plotly_chart(fig4)
+
+
+
+
+
+
+
