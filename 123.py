@@ -409,7 +409,23 @@ with st.expander("K線圖, 布林通道"):
                   secondary_y=False)
     
     fig4.layout.yaxis2.showgrid=True
-    st.plotly_chart(fig4, use_container_width=True)
+    st.plotly_chart(fig4, use_container_width=True
+
+import streamlit as st
+
+# 使用markdown嵌入自定义CSS样式
+st.markdown(
+    """
+    <style>
+    body {
+        background-color: #3872fb;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
+
+
 
 
 
