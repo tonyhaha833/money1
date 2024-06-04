@@ -31,6 +31,29 @@ def load_data(url):
 ## 读取Pickle文件
 df_original = load_data('testdata.pkl')
 
+import datetime
+
+# 确保 DataFrame 中包含名为 'time' 的列
+if 'time' not in df_original.columns:
+    st.error("DataFrame 中缺少 'time' 列，请检查数据是否正确。")
+else:
+    st.subheader("选择开始与结束的日期，区间：2019-01-02 至 2024-04-30")
+    start_date = st.text_input('选择开始日期 (日期格式: 2019-01-02)', '2019-01-02')
+    end_date = st.text_input('选择结束日期 (日期格式: 2024-04-30)', '2019-04-30')
+
+    try:
+        # 转换输入的日期格式为日期时间类型
+        start_date = datetime.datetime.strptime(start_date, '%Y-%m-%d')
+        end_date = datetime.datetime.strptime(end_date, '%Y-%m-%d')
+        
+        # 使用条件筛选选择时间区间的数据
+        df = df_original[(df_original['time'] >= start_date) & (df_original['time'] <= end_date)]
+        
+        # 显示筛选后的数据
+        st.write(df)
+
+    except ValueError:
+        st.error("日期格式不正确，请输入正确的日期格式，例如：2019-01-02。")
 
 
 
