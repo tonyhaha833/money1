@@ -15,19 +15,26 @@ html_temp = """
     </div>
     """
 stc.html(html_temp)
-## 读取Pickle文件
+## 读取ickle文件
+# 讀取 Excel 檔案
+df = pd.read_excel('testdata.xlsx')
+
+# 將資料儲存為 pickle 檔案
+df.to_pickle('testdata.pkl')
+
+
 @st.cache_data(ttl=3600, show_spinner="正在加载数据")
 def load_data(url):
     df = pd.read_pickle(url)
     return df
-df_original = load_data('testdata.pkl')
+df_original = pd.read_pickle('testdata.pkl')
 
-#df_original = df_original.drop('Unnamed: 0', axis=1)
+
 
 ##### 選擇資料區間
-st.subheader("選擇開始與結束的日期, 區間:2022-01-03 至 2022-11-18")
-start_date = st.text_input('選擇開始日期 (日期格式: 2022-01-03)', '2022-01-03')
-end_date = st.text_input('選擇結束日期 (日期格式: 2022-11-18)', '2022-11-18')
+st.subheader("選擇開始與結束的日期, 區間:2019-01-01 至 2024-04-30")
+start_date = st.text_input('選擇開始日期 (日期格式: 2019-01-01)', '2019-01-01')
+end_date = st.text_input('選擇結束日期 (日期格式: 2024-04-30)', '2024-04-30')
 start_date = datetime.datetime.strptime(start_date, '%Y-%m-%d')
 end_date = datetime.datetime.strptime(end_date, '%Y-%m-%d')
 df = df_original[(df_original['time'] >= start_date) & (df_original['time'] <= end_date)]
