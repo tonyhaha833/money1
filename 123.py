@@ -409,7 +409,7 @@ with st.expander("K線圖, 布林通道"):
                   secondary_y=False)
     
     fig4.layout.yaxis2.showgrid=True
-    st.plotly_chart(fig4, use_container_width=True
+    st.plotly_chart(fig4, use_container_width=True)
 
 import streamlit as st
 
