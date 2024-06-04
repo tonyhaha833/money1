@@ -134,16 +134,14 @@ for i in range(KBar_dic['time'].size):
 
 
 KBar_dic = {} 
-kbar_instance = KBar()  # 创建KBar对象的实例
-TAKBar_data = kbar_instance.TAKBar()  # 调用TAKBar方法获取数据
-print(TAKBar_data)
-KBar_dic['time'] =  TAKBar_data['time']   
-KBar_dic['product'] = np.repeat('tsmc', len(TAKBar_data['time']))
-KBar_dic['open'] = TAKBar_data['open']
-KBar_dic['high'] =  TAKBar_data['high']
-KBar_dic['low'] =  TAKBar_data['low']
-KBar_dic['close'] =  TAKBar_data['close']
-KBar_dic['volume'] =  TAKBar_data['volume']
+KBar_dic['time'] =  KBar.TAKBar['time']   
+#KBar_dic['product'] =  KBar.TAKBar['product']
+KBar_dic['product'] = np.repeat('tsmc', KBar_dic['time'].size)
+KBar_dic['open'] = KBar.TAKBar['open']
+KBar_dic['high'] =  KBar.TAKBar['high']
+KBar_dic['low'] =  KBar.TAKBar['low']
+KBar_dic['close'] =  KBar.TAKBar['close']
+KBar_dic['volume'] =  KBar.TAKBar['volume']
 
 #
 ######  改變 KBar 時間長度 (以上)  ########
