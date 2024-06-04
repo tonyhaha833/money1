@@ -33,27 +33,13 @@ stc.html(html_temp)
 
 ## 读取Pickle文件
 @st.cache_data(ttl=3600,show_spinner="正在加載資料")
-# 读取数据文件并加载DataFrame
+def load_data(url):
+    df = pd.read_pickle(url)
+    return df
+## 读取Pickle文件
 df_original = load_data('testdata.pkl')
 
-# 对数据进行处理
-# 例如，删除不需要的列
-# df = df_original.drop(columns=['column_name'])
-
-# 然后再调用 dropna() 方法
-df_original.dropna(axis=0, inplace=True)  # 删除行中的 NaN 值
-df_original.dropna(axis=1, inplace=True)  # 删除列中的 NaN 值
-
-#df.columns  ## Index(['Unnamed: 0', 'time', 'open', 'low', 'high', 'close', 'volume','amount'], dtype='object')
-#df_original = df_original.drop('Unnamed: 0',axis=1)
-#df.columns  ## Index(['time', 'open', 'low', 'high', 'close', 'volume', 'amount'], dtype='object')
-#df['time']
-#type(df['time'])  ## pandas.core.series.Series
-#df['time'][11]
-#df.head()
-#df.tail()
-#type(df['time'][0])
-
+df_original = df_original.drop('Unnamed: 0',axis=1)
 
 ##### 選擇資料區間
 st.subheader("選擇開始與結束的日期, 區間:2019-01-01 至 2024-4-30")
