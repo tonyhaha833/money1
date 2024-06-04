@@ -79,13 +79,7 @@ KBar_dic['amount']=np.array(KBar_amount_list)
 
 
 ######  (3) 改變 KBar 時間長度 (以下)  ########
-# Product_array = np.array([])
-# Time_array = np.array([])
-# Open_array = np.array([])
-# High_array = np.array([])
-# Low_array = np.array([])
-# Close_array = np.array([])
-# Volume_array = np.array([])
+
 
 Date = start_date.strftime("%Y-%m-%d")
 
@@ -109,11 +103,16 @@ cycle_duration = st.number_input('输入一根 K 棒的时间长度（单位：{
 cycle_duration = int(cycle_duration)
 #cycle_duration = 1440   ## 可以改成你想要的 KBar 週期
 #KBar = indicator_f_Lo2.KBar(Date,'time',2)
-KBar = indicator_forKBar_short.KBar(Date,cycle_duration)    ## 設定cycle_duration可以改成你想要的 KBar 週期
+KBar = indicator_forKBar_short.KBar(Date,cycle_duration*1440)    ## 設定cycle_duration可以改成你想要的 KBar 週
 
-#KBar_dic['amount'].shape   ##(5585,)
-#KBar_dic['amount'].size    ##5585
-#KBar_dic['time'].size    ##5585
+class KBar:
+    def __init__(self):
+        # 初始化KBar对象
+        pass
+
+    def AddPrice(self, time, open_price, close_price, low_price, high_price, volume):
+        # 在这里实现向KBar对象中添加价格数据的逻辑
+        pass
 
 for i in range(KBar_dic['time'].size):
     
