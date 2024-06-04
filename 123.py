@@ -154,7 +154,7 @@ KBar_dic = {}
 
 
 kbar_instance = KBar()
-
+print(kbar_instance.TAKBar.keys())
 # 访问TAKBar属性，并获取其中的'time'数据，然后赋值给KBar_dic['time']
 KBar_dic['time'] = kbar_instance.TAKBar['time']
 
