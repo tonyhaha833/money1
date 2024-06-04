@@ -53,32 +53,14 @@ df = df_original[(df_original['time'] >= start_date) & (df_original['time'] <= e
 
 ###### (2) 轉化為字典 ######:
 KBar_dic = df.to_dict()
-#type(KBar_dic)
-#KBar_dic.keys()  ## dict_keys(['time', 'open', 'low', 'high', 'close', 'volume', 'amount'])
-#KBar_dic['open']
-#type(KBar_dic['open'])  ## dict
-#KBar_dic['open'].values()
-#type(KBar_dic['open'].values())  ## dict_values
 KBar_open_list = list(KBar_dic['open'].values())
 KBar_dic['open']=np.array(KBar_open_list)
-#type(KBar_dic['open'])  ## numpy.ndarray
-#KBar_dic['open'].shape  ## (1596,)
-#KBar_dic['open'].size   ##  1596
 
 KBar_dic['product'] = np.repeat('tsmc', KBar_dic['open'].size)
-#KBar_dic['product'].size   ## 1596
-#KBar_dic['product'][0]      ## 'tsmc'
 
 KBar_time_list = list(KBar_dic['time'].values())
 KBar_time_list = [i.to_pydatetime() for i in KBar_time_list] ## Timestamp to datetime
 KBar_dic['time']=np.array(KBar_time_list)
-
-# KBar_time_list[0]        ## Timestamp('2022-07-01 09:01:00')
-# type(KBar_time_list[0])  ## pandas._libs.tslibs.timestamps.Timestamp
-#KBar_time_list[0].to_pydatetime() ## datetime.datetime(2022, 7, 1, 9, 1)
-#KBar_time_list[0].to_numpy()      ## numpy.datetime64('2022-07-01T09:01:00.000000000')
-#KBar_dic['time']=np.array(KBar_time_list)
-#KBar_dic['time'][80]   ## Timestamp('2022-09-01 23:02:00')
 
 KBar_low_list = list(KBar_dic['low'].values())
 KBar_dic['low']=np.array(KBar_low_list)
@@ -144,8 +126,8 @@ for i in range(KBar_dic['time'].size):
     high_price= KBar_dic['high'][i]
     qty =  KBar_dic['volume'][i]
     amount = KBar_dic['amount'][i]
-    #tag=KBar.TimeAdd(time,price,qty,prod)
-    tag=KBar.AddPrice(time, open_price, close_price, low_price, high_price, qty)
+    tag = KBar.AddPrice(time, open_price, close_price, low_price, high_price, qty)
+
     
     # 更新K棒才判斷，若要逐筆判斷則 註解下面兩行, 因為計算 MA是利用收盤價, 而在 KBar class 中的 "TimeAdd"函數方法中, 收盤價只是一直附加最新的 price 而已.
     #if tag != 1:
