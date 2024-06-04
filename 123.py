@@ -132,7 +132,11 @@ for i in range(KBar_dic['time'].size):
     tag = kbar_instance.AddPrice(time, open_price, close_price, low_price, high_price, qty)
 
 
-KBar_dic = {}    
+
+KBar_dic = {} 
+kbar_instance = KBar()  # 创建KBar对象的实例
+TAKBar_data = kbar_instance.TAKBar()  # 调用TAKBar方法获取数据
+print(TAKBar_data)
 KBar_dic['time'] =  TAKBar_data['time']   
 KBar_dic['product'] = np.repeat('tsmc', len(TAKBar_data['time']))
 KBar_dic['open'] = TAKBar_data['open']
