@@ -15,8 +15,8 @@ import streamlit.components.v1 as stc
 
 ###### (1) 開始設定 ######
 html_temp = """
-		<div style="background-color:#3872fb;padding:10px;border-radius:10px">
-		<h1 style="color:white;text-align:center;">金融資料視覺化呈現 (金融看板) </h1>
+		<div style="background-color:#808080;padding:10px;border-radius:10px">
+		<h1 style="color:white;text-align:center;">0050金融資料視覺化呈現 (金融看板) </h1>
 		<h2 style="color:white;text-align:center;">Financial Dashboard </h2>
 		</div>
 		"""
@@ -36,7 +36,7 @@ stc.html(html_temp)
 def load_data(url):
     df = pd.read_pickle(url)
     return df
-df_original = pd.read_pickle('kbars_2330_2022-01-01-2022-11-18.pkl')
+df_original = pd.read_pickle('testdata.pkl')
 
 #df.columns  ## Index(['Unnamed: 0', 'time', 'open', 'low', 'high', 'close', 'volume','amount'], dtype='object')
 df_original = df_original.drop('Unnamed: 0',axis=1)
@@ -50,9 +50,9 @@ df_original = df_original.drop('Unnamed: 0',axis=1)
 
 
 ##### 選擇資料區間
-st.subheader("選擇開始與結束的日期, 區間:2022-01-03 至 2022-11-18")
-start_date = st.text_input('選擇開始日期 (日期格式: 2022-01-03)', '2022-01-03')
-end_date = st.text_input('選擇結束日期 (日期格式: 2022-11-18)', '2022-11-18')
+st.subheader("選擇開始與結束的日期, 區間:2019-01-01 至 2024-4-30")
+start_date = st.text_input('選擇開始日期 (日期格式: 2019-01-01)', '2024-04-30')
+end_date = st.text_input('選擇結束日期 (日期格式: 2019-01-01)', '2024-04-30')
 start_date = datetime.datetime.strptime(start_date,'%Y-%m-%d')
 end_date = datetime.datetime.strptime(end_date,'%Y-%m-%d')
 # 使用条件筛选选择时间区间的数据
