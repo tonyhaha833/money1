@@ -114,18 +114,23 @@ class KBar:
         # 在这里实现向KBar对象中添加价格数据的逻辑
         pass
 
+# 创建KBar对象的实例
+kbar_instance = KBar()
+
+# 循环遍历KBar_dic中的数据，并使用KBar对象的实例调用AddPrice方法
 for i in range(KBar_dic['time'].size):
     
-    #time = datetime.datetime.strptime(KBar_dic['time'][i],'%Y%m%d%H%M%S%f')
     time = KBar_dic['time'][i]
-    #prod = KBar_dic['product'][i]
-    open_price= KBar_dic['open'][i]
-    close_price= KBar_dic['close'][i]
-    low_price= KBar_dic['low'][i]
-    high_price= KBar_dic['high'][i]
-    qty =  KBar_dic['volume'][i]
+    open_price = KBar_dic['open'][i]
+    close_price = KBar_dic['close'][i]
+    low_price = KBar_dic['low'][i]
+    high_price = KBar_dic['high'][i]
+    qty = KBar_dic['volume'][i]
     amount = KBar_dic['amount'][i]
-    tag = KBar.AddPrice(time, open_price, close_price, low_price, high_price, qty)
+    
+    # 使用KBar对象的实例调用AddPrice方法
+    tag = kbar_instance.AddPrice(time, open_price, close_price, low_price, high_price, qty)
+
 
     
     # 更新K棒才判斷，若要逐筆判斷則 註解下面兩行, 因為計算 MA是利用收盤價, 而在 KBar class 中的 "TimeAdd"函數方法中, 收盤價只是一直附加最新的 price 而已.
