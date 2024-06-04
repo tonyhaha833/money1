@@ -37,6 +37,8 @@ start_date = st.text_input('選擇開始日期 (日期格式: 2019-01-01)', '201
 end_date = st.text_input('選擇結束日期 (日期格式: 2024-04-30)', '2024-04-30')
 start_date = datetime.datetime.strptime(start_date, '%Y-%m-%d')
 end_date = datetime.datetime.strptime(end_date, '%Y-%m-%d')
+df_original['time'] = pd.to_datetime(df_original['time'])
+
 df = df_original[(df_original['time'] >= start_date) & (df_original['time'] <= end_date)]
 
 ###### (2) 轉化為字典 ######:
