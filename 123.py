@@ -134,7 +134,9 @@ for i in range(KBar_dic['time'].size):
 
     
 KBar_dic = {}
- ## 形成 KBar 字典 (新週期的):
+kbar_instance = KBar()  # 创建KBar对象的实例
+TAKBar_data = kbar_instance.TAKBar()  # 调用TAKBar方法获取数据
+## 形成 KBar 字典 (新週期的):
 KBar_dic['time'] =  KBar.TAKBar['time']   
 #KBar_dic['product'] =  KBar.TAKBar['product']
 KBar_dic['product'] = np.repeat('tsmc', KBar_dic['time'].size)
