@@ -31,7 +31,7 @@ def load_data(url):
 ## 读取Pickle文件
 df_original = load_data('testdata.pkl')
 
-df_original = df_original.drop('Unnamed: 0',axis=1)
+
 
 
 st.subheader("選擇開始與結束的日期, 區間:2019-01-02 至 2024-04-30")
