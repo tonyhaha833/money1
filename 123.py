@@ -31,15 +31,17 @@ stc.html(html_temp)
 # ## 保存为Pickle文件:
 # df_original.to_pickle('kbars_2330_2022-01-01-2022-11-18.pkl')
 
-## 读取Pickle文件
+# 读取Pickle文件并删除不需要的列
 @st.cache_data(ttl=3600,show_spinner="正在加載資料")
 def load_data(url):
     df = pd.read_pickle(url)
+    # 删除 'Unnamed: 0' 列
+    df.drop('Unnamed: 0', axis=1, inplace=True)
     return df
+
 ## 读取Pickle文件
 df_original = load_data('testdata.pkl')
 
-#df_original = df_original.drop('Unnamed: 0',axis=1)
 
 ##### 選擇資料區間
 start_date = st.text_input('選擇開始日期 (日期格式: 2019-01-01)', '2024-04-30')
