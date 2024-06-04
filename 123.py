@@ -25,8 +25,6 @@ start_date = st.text_input('選擇開始日期 (日期格式: 2019-01-01)', '202
 end_date = st.text_input('選擇結束日期 (日期格式: 2019-01-01)', '2024-04-30')
 start_date = datetime.datetime.strptime(start_date,'%Y-%m-%d')
 end_date = datetime.datetime.strptime(end_date,'%Y-%m-%d')
-# 使用条件筛选选择时间区间的数据
-df_original['time'] = pd.to_datetime(df_original['time'])
 df = df_original[(df_original['time'] >= start_date) & (df_original['time'] <= end_date)]
 
 
