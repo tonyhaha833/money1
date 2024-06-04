@@ -37,6 +37,8 @@ def load_data(url):
     df = pd.read_pickle(url)
     return df
 df_original = pd.read_pickle('testdata.pkl')
+df.dropna(axis=0, inplace=True)  # inplace=True 表示在原始 DataFrame 上进行修改，而不是返回一个新的 DataFrame
+df.dropna(axis=1, inplace=True)
 
 #df.columns  ## Index(['Unnamed: 0', 'time', 'open', 'low', 'high', 'close', 'volume','amount'], dtype='object')
 #df_original = df_original.drop('Unnamed: 0',axis=1)
