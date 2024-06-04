@@ -19,7 +19,10 @@ stc.html(html_temp)
 def load_data(url):
     df = pd.read_pickle(url)
     return df
+	
+df_original = load_data('testdata.pkl')
 
+df_original = df_original.drop('Unnamed: 0',axis=1)
 ## 读取Pickle文件
 start_date = st.text_input('選擇開始日期 (日期格式: 2019-01-01)', '2024-04-30')
 end_date = st.text_input('選擇結束日期 (日期格式: 2019-01-01)', '2024-04-30')
