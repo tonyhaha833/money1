@@ -151,32 +151,23 @@ for i in range(KBar_dic['time'].size):
 
 KBar_dic = {}
 
-# ## 形成 KBar 字典:
-# KBar_dic['time'] =  Time_array   
-# KBar_dic['product'] =  Product_array
-# KBar_dic['open'] =  Open_array
-# KBar_dic['high'] =  High_array
-# KBar_dic['low'] =  Low_array
-# KBar_dic['close'] =  Close_array
-# KBar_dic['volume'] =  Volume_array
 
- ## 形成 KBar 字典 (新週期的):
+
 kbar_instance = KBar()
-KBar_dic['time'] =  KBar.TAKBar['time']   
-#KBar_dic['product'] =  KBar.TAKBar['product']
-KBar_dic['product'] = np.repeat('tsmc', KBar_dic['time'].size)
-KBar_dic['open'] = KBar.TAKBar['open']
-KBar_dic['high'] =  KBar.TAKBar['high']
-KBar_dic['low'] =  KBar.TAKBar['low']
-KBar_dic['close'] =  KBar.TAKBar['close']
-KBar_dic['volume'] =  KBar.TAKBar['volume']
-# KBar_dic['time'].shape  ## (2814,)
-# KBar_dic['open'].shape  ## (2814,)
-# KBar_dic['high'].shape  ## (2814,)
-# KBar_dic['low'].shape  ## (2814,)
-# KBar_dic['close'].shape  ## (2814,)
-# KBar_dic['volume'].shape  ## (2814,)
-#KBar_dic['time'][536]
+
+# 访问TAKBar属性，并获取其中的'time'数据，然后赋值给KBar_dic['time']
+KBar_dic['time'] = kbar_instance.TAKBar['time']
+
+# 为KBar_dic['product']赋值为 'tsmc' 的重复值，数量与KBar_dic['time']中的数据量相同
+KBar_dic['product'] = np.repeat('tsmc', len(KBar_dic['time']))
+
+# 获取KBar.TAKBar中的数据，并赋值给相应的键
+KBar_dic['open'] = kbar_instance.TAKBar['open']
+KBar_dic['high'] = kbar_instance.TAKBar['high']
+KBar_dic['low'] = kbar_instance.TAKBar['low']
+KBar_dic['close'] = kbar_instance.TAKBar['close']
+KBar_dic['volume'] = kbar_instance.TAKBar['volume']
+
 ######  改變 KBar 時間長度 (以上)  ########
 
 
